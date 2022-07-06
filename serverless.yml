@@ -62,3 +62,23 @@ functions:
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
+  imc:
+    handler: handler.imc
+    description: GET /factum/imc/{peso}/{altura}
+    events:
+      - http:
+          path: /factum/imc/{peso}/{altura}
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  operaciones:
+    handler: handler.operaciones
+    description: GET /factum/operaciones/{cantidad}/{max}/{min}
+    events:
+      - http:
+          path: /factum/operaciones/{cantidad}/{max}/{min}
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}

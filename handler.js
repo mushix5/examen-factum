@@ -3,6 +3,8 @@ var {esfibonacci, getFibonacci}  = require('./funciones/fibonacci');
 var {getCollatz}  = require('./funciones/collatz');
 var {getFactorial, esFactorial}  = require('./funciones/factorial');
 var {esPrimo}  = require('./funciones/primo');
+var {getIMC}  = require('./funciones/imc');
+var {getArrayNumbers}  = require('./funciones/operaciones');
 
 const DATA_RESPONSE = {
   statusCode: 200,
@@ -126,10 +128,59 @@ async function factorial(event){
   }
   return response;
 }
+
+async function imc(event){
+  let peso = parseInt(`${event.pathParameters.peso}`);
+  let altura = parseInt(`${event.pathParameters.altura}`);
+  
+  if(!peso || !altura){
+    return {
+      statusCode: 400,
+      body: {}
+    }
+  }
+  let response = DATA_RESPONSE; 
+  let imc = [];
+
+  try {
+    imc = await getIMC(peso, altura);
+    response.body = JSON.stringify({"result": imc});
+  } catch (error) {
+    console.log(error);
+    response.statusCode = 500;
+  }
+  return response;
+}
+
+async function operaciones(event){
+  let cantidad = parseInt(`${event.pathParameters.cantidad}`);
+  let max = parseInt(`${event.pathParameters.max}`);
+  let min = parseInt(`${event.pathParameters.min}`);
+  
+  if(!cantidad || !max || !min){
+    return {
+      statusCode: 400,
+      body: {}
+    }
+  }
+  let response = DATA_RESPONSE; 
+  let operaciones = [];
+
+  try {
+    operaciones = await getArrayNumbers(cantidad, max, min);
+    response.body = JSON.stringify({"result": operaciones});
+  } catch (error) {
+    console.log(error);
+    response.statusCode = 500;
+  }
+  return response;
+}
 module.exports = {
   validaciones,
   Cfibonacci,
   fibonacci,
   collatz,
-  factorial
+  factorial,
+  operaciones,
+  imc
 }
