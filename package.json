@@ -1,0 +1,17 @@
+{
+  "name": "factum-exam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "offline": "sls offline start",
+    "deploy": "sls deploy --verbose"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-offline": "^8.8.0"
+  }
+}

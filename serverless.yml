@@ -1,0 +1,64 @@
+service: factum-exam
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+
+custom:
+  allowedHeaders:
+    - Accept
+    - Content-Type
+    - Content-Length
+    - Authorization
+    - X-Amz-Date
+    - X-Api-Key
+    - X-Amz-Security-Token
+    - X-Amz-User-Agent
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+
+functions:
+  validaciones:
+    handler: handler.validaciones
+    description: GET /factum/validaciones/{numero}
+    events:
+      - http:
+          path: /factum/validaciones/{numero}
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  fibonacci:
+    handler: handler.fibonacci
+    description: GET /factum/fibonacci/{numero}
+    events:
+      - http:
+          path: /factum/fibonacci/{numero}
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  collatz:
+    handler: handler.collatz
+    description: GET /factum/collatz/{numero}
+    events:
+      - http:
+          path: /factum/collatz/{numero}
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  factorial:
+    handler: handler.factorial
+    description: GET /factum/factorial/{numero}
+    events:
+      - http:
+          path: /factum/factorial/{numero}
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
